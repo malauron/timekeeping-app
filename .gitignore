@@ -1,5 +1,6 @@
 Backup/
 BiometricDeploy/
-FingerprintSoftwareSetup/
+FingerprintSoftwareSetup/Debug/
+FingerprintSoftwareSetup/Release/
 standalone+sdk-6.3.1.37.zip
 
