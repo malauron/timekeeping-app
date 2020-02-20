@@ -30,6 +30,8 @@ Module modRoutines
                     SysParam.BioIpAddress = CType(mRow.Item("bio_ipaddress"), String)
                     SysParam.BioPortNo = CType(mRow.Item("bio_portno"), String)
                     SysParam.FlexiBreakHours = CType(mRow.Item("flexibreak_hrs"), Double)
+                    SysParam.NextDayMinuteDifference = CType(mRow.Item("nextDayMinDiff"), Double)
+                    SysParam.EditDTREntry = CType(mRow.Item("editDTR"), Boolean)
 
                 Next
             End If

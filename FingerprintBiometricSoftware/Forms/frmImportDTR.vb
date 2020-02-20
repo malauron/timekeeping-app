@@ -212,11 +212,13 @@ Public Class frmImportDTR
         Dim mCommand As New MySqlCommand
         Dim mDateFrom As Date
         Dim mCurrDate As Date
+        Dim previousLog As DateTime
         Dim mEmployee_IDs As New DataTable
         Dim employee_logs As New DataTable
         Dim mHolidays As New DataTable
         Dim mFirstIN As Boolean = True
         Dim mColNum As Integer = 1
+        Dim minuteDiff As Double
 
         mTrans = Cn.Connection.BeginTransaction
 
@@ -256,19 +258,39 @@ Public Class frmImportDTR
 
                 mFirstIN = True
                 For Each mLog As DataRow In employee_logs.Rows
+                    minuteDiff = 0
                     If Not mFirstIN Then
                         If mCurrDate <> CType(mLog.Item("datetime_log"), Date).Date Then
                             If CType(mLog.Item("log_status"), Integer) = 1 Then
-                                mColNum = 1
-                                mCurrDate = CType(mLog.Item("datetime_log"), Date).Date
-                                mCommand.CommandText = "insert ignore into schedules_assignment (employee_id,schedule_id,work_date,department_id) values (" & _
-                                            "" & CType(mEmpID.Item("employee_id"), String) & "," & CType(mEmpID.Item("schedule_id"), String) & ",'" & Format(mCurrDate, "yyyy-MM-dd") & "'," & CType(mEmpID.Item("department_id"), Integer) & ")"
-                                mCommand.ExecuteNonQuery()
-                                mCommand.CommandText = "insert into employee_dtrs (employee_id,work_date,log1) values " & _
-                                            "(" & CType(mEmpID.Item("employee_id"), String) & ",'" & Format(mCurrDate, "yyyy-MM-dd") & "'," & _
-                                            "'" & Format(CType(mLog.Item("datetime_log"), Date), "yyyy-MM-dd HH:mm:ss") & "')"
-                                mCommand.ExecuteNonQuery()
-                                mColNum = mColNum + 1
+                                minuteDiff = CType(DateDiff(DateInterval.Minute, previousLog, CType(mLog.Item("datetime_log"), DateTime)), Double)
+                                
+                                'Create a new DTR entry for time logs with more than the specified number of hours difference.
+                                If minuteDiff > SysParam.NextDayMinuteDifference Then
+                                    mColNum = 1
+                                    mCurrDate = CType(mLog.Item("datetime_log"), Date).Date
+                                    mCommand.CommandText = "insert ignore into schedules_assignment (employee_id,schedule_id,work_date,department_id) values (" & _
+                                                "" & CType(mEmpID.Item("employee_id"), String) & "," & CType(mEmpID.Item("schedule_id"), String) & ",'" & Format(mCurrDate, "yyyy-MM-dd") & "'," & CType(mEmpID.Item("department_id"), Integer) & ")"
+                                    mCommand.ExecuteNonQuery()
+                                    mCommand.CommandText = "insert into employee_dtrs (employee_id,work_date,log1) values " & _
+                                                "(" & CType(mEmpID.Item("employee_id"), String) & ",'" & Format(mCurrDate, "yyyy-MM-dd") & "'," & _
+                                                "'" & Format(CType(mLog.Item("datetime_log"), Date), "yyyy-MM-dd HH:mm:ss") & "')"
+                                    mCommand.ExecuteNonQuery()
+                                    mColNum = mColNum + 1
+                                Else
+                                    If mColNum = 3 Or mColNum = 5 Then
+                                        mCommand.CommandText = "update employee_dtrs set log" & mColNum & "='" & Format(CType(mLog.Item("datetime_log"), Date), "yyyy-MM-dd HH:mm:ss") & "' " & _
+                                                    "where employee_id=" & CType(mEmpID.Item("employee_id"), String) & " and work_date='" & Format(mCurrDate, "yyyy-MM-dd") & "'"
+                                        mCommand.ExecuteNonQuery()
+                                        mColNum = mColNum + 1
+                                    Else
+                                        If mColNum + 1 < 6 Then
+                                            mCommand.CommandText = "update employee_dtrs set log" & mColNum + 1 & "='" & Format(CType(mLog.Item("datetime_log"), Date), "yyyy-MM-dd HH:mm:ss") & "' " & _
+                                                    "where employee_id=" & CType(mEmpID.Item("employee_id"), String) & " and work_date='" & Format(mCurrDate, "yyyy-MM-dd") & "'"
+                                            mCommand.ExecuteNonQuery()
+                                            mColNum = mColNum + 2
+                                        End If
+                                    End If
+                                End If
                             Else
                                 If mColNum = 2 Or mColNum = 4 Or mColNum = 6 Then
                                     mCommand.CommandText = "update employee_dtrs set log" & mColNum & "='" & Format(CType(mLog.Item("datetime_log"), Date), "yyyy-MM-dd HH:mm:ss") & "' " & _
@@ -322,6 +344,7 @@ Public Class frmImportDTR
                             mCommand.ExecuteNonQuery()
                         End If
                     End If
+                    previousLog = CType(mLog.Item("datetime_log"), DateTime)
                 Next
             Next
             mTrans.Commit()

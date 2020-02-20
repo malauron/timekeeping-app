@@ -12,6 +12,8 @@
     Private bioDevicePort As String
     Private employeeBioIdPayrollMapValue As String
     Private flexiBreakHoursValue As Double
+    Private nextDayMinDiff As Double
+    Private editDTR As Boolean
 
     Public Property GracePeriod() As Integer
         Get
@@ -118,6 +120,24 @@
         End Get
         Set(value As Double)
             flexiBreakHoursValue = value
+        End Set
+    End Property
+
+    Public Property NextDayMinuteDifference() As Double
+        Get
+            Return nextDayMinDiff
+        End Get
+        Set(value As Double)
+            nextDayMinDiff = value
+        End Set
+    End Property
+
+    Public Property EditDTREntry() As Boolean
+        Get
+            Return editDTR
+        End Get
+        Set(value As Boolean)
+            editDTR = value
         End Set
     End Property
 

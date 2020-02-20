@@ -243,81 +243,82 @@ Public Class frmAssignSchedules
     End Sub
 
     Private Sub tdbAssignSchedules_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tdbAssignSchedules.DoubleClick
-        'If tdbAssignSchedules.RowCount > 0 Then
-        '    With tdbAssignSchedules
-        '        If (CType(.Columns(.Col).DataField, String) = "log1" Or CType(.Columns(.Col).DataField, String) = "log2" Or CType(.Columns(.Col).DataField, String) = "log3" Or _
-        '            CType(.Columns(.Col).DataField, String) = "log4" Or CType(.Columns(.Col).DataField, String) = "log5" Or CType(.Columns(.Col).DataField, String) = "log6") Then 'And CType(User.UserID, Integer) = 1 Then
+        If Not SysParam.EditDTREntry Then Exit Sub
+        If tdbAssignSchedules.RowCount > 0 Then
+            With tdbAssignSchedules
+                If (CType(.Columns(.Col).DataField, String) = "log1" Or CType(.Columns(.Col).DataField, String) = "log2" Or CType(.Columns(.Col).DataField, String) = "log3" Or _
+                    CType(.Columns(.Col).DataField, String) = "log4" Or CType(.Columns(.Col).DataField, String) = "log5" Or CType(.Columns(.Col).DataField, String) = "log6") Then 'And CType(User.UserID, Integer) = 1 Then
 
-        '            mNewLog1 = ""
-        '            mNewLog2 = ""
-        '            mNewLog3 = ""
-        '            mNewLog4 = ""
-        '            mNewLog5 = ""
-        '            mNewLog6 = ""
+                    mNewLog1 = ""
+                    mNewLog2 = ""
+                    mNewLog3 = ""
+                    mNewLog4 = ""
+                    mNewLog5 = ""
+                    mNewLog6 = ""
 
-        '            If CType(.Columns("isedited").Value, String) = "Y" Then
-        '                If Not IsDBNull(.Columns("edit_log1").Value) Then mNewLog1 = CType(.Columns("edit_log1").Value, String)
-        '                If Not IsDBNull(.Columns("edit_log2").Value) Then mNewLog2 = CType(.Columns("edit_log2").Value, String)
-        '                If Not IsDBNull(.Columns("edit_log3").Value) Then mNewLog3 = CType(.Columns("edit_log3").Value, String)
-        '                If Not IsDBNull(.Columns("edit_log4").Value) Then mNewLog4 = CType(.Columns("edit_log4").Value, String)
-        '                If Not IsDBNull(.Columns("edit_log5").Value) Then mNewLog5 = CType(.Columns("edit_log5").Value, String)
-        '                If Not IsDBNull(.Columns("edit_log6").Value) Then mNewLog6 = CType(.Columns("edit_log6").Value, String)
-        '            Else
-        '                If Not IsDBNull(.Columns("orig_log1").Value) Then mNewLog1 = CType(.Columns("orig_log1").Value, String)
-        '                If Not IsDBNull(.Columns("orig_log2").Value) Then mNewLog2 = CType(.Columns("orig_log2").Value, String)
-        '                If Not IsDBNull(.Columns("orig_log3").Value) Then mNewLog3 = CType(.Columns("orig_log3").Value, String)
-        '                If Not IsDBNull(.Columns("orig_log4").Value) Then mNewLog4 = CType(.Columns("orig_log4").Value, String)
-        '                If Not IsDBNull(.Columns("orig_log5").Value) Then mNewLog5 = CType(.Columns("orig_log5").Value, String)
-        '                If Not IsDBNull(.Columns("orig_log6").Value) Then mNewLog6 = CType(.Columns("orig_log6").Value, String)
-        '            End If
-        '            Call Hide()
-        '            Dim mForm As Form
-        '            mForm = New frmDTRAdjustments
-        '            mForm.ShowDialog()
-        '            mForm.Dispose()
-        '            Call Show()
-        '            If mLogUpdated = True Then
-        '                .Columns("log1").Value = Nothing
-        '                .Columns("log2").Value = Nothing
-        '                .Columns("log3").Value = Nothing
-        '                .Columns("log4").Value = Nothing
-        '                .Columns("log5").Value = Nothing
-        '                .Columns("log6").Value = Nothing
-        '                .Columns("edit_log1").Value = Nothing
-        '                .Columns("edit_log2").Value = Nothing
-        '                .Columns("edit_log3").Value = Nothing
-        '                .Columns("edit_log4").Value = Nothing
-        '                .Columns("edit_log5").Value = Nothing
-        '                .Columns("edit_log6").Value = Nothing
-        '                .Columns("isedited").Value = "Y"
-        '                If Trim(mNewLog1) <> "" Then
-        '                    .Columns("log1").Value = Format(CType(mNewLog1, DateTime), "HH:mm")
-        '                    .Columns("edit_log1").Value = CType(mNewLog1, DateTime)
-        '                End If
-        '                If Trim(mNewLog2) <> "" Then
-        '                    .Columns("log2").Value = Format(CType(mNewLog2, DateTime), "HH:mm")
-        '                    .Columns("edit_log2").Value = CType(mNewLog2, DateTime)
-        '                End If
-        '                If Trim(mNewLog3) <> "" Then
-        '                    .Columns("log3").Value = Format(CType(mNewLog3, DateTime), "HH:mm")
-        '                    .Columns("edit_log3").Value = CType(mNewLog3, DateTime)
-        '                End If
-        '                If Trim(mNewLog4) <> "" Then
-        '                    .Columns("log4").Value = Format(CType(mNewLog4, DateTime), "HH:mm")
-        '                    .Columns("edit_log4").Value = CType(mNewLog4, DateTime)
-        '                End If
-        '                If Trim(mNewLog5) <> "" Then
-        '                    .Columns("log5").Value = Format(CType(mNewLog5, DateTime), "HH:mm")
-        '                    .Columns("edit_log5").Value = CType(mNewLog5, DateTime)
-        '                End If
-        '                If Trim(mNewLog6) <> "" Then
-        '                    .Columns("log6").Value = Format(CType(mNewLog6, DateTime), "HH:mm")
-        '                    .Columns("edit_log6").Value = CType(mNewLog6, DateTime)
-        '                End If
-        '            End If
-        '        End If
-        '    End With
-        'End If
+                    If CType(.Columns("isedited").Value, String) = "Y" Then
+                        If Not IsDBNull(.Columns("edit_log1").Value) Then mNewLog1 = CType(.Columns("edit_log1").Value, String)
+                        If Not IsDBNull(.Columns("edit_log2").Value) Then mNewLog2 = CType(.Columns("edit_log2").Value, String)
+                        If Not IsDBNull(.Columns("edit_log3").Value) Then mNewLog3 = CType(.Columns("edit_log3").Value, String)
+                        If Not IsDBNull(.Columns("edit_log4").Value) Then mNewLog4 = CType(.Columns("edit_log4").Value, String)
+                        If Not IsDBNull(.Columns("edit_log5").Value) Then mNewLog5 = CType(.Columns("edit_log5").Value, String)
+                        If Not IsDBNull(.Columns("edit_log6").Value) Then mNewLog6 = CType(.Columns("edit_log6").Value, String)
+                    Else
+                        If Not IsDBNull(.Columns("orig_log1").Value) Then mNewLog1 = CType(.Columns("orig_log1").Value, String)
+                        If Not IsDBNull(.Columns("orig_log2").Value) Then mNewLog2 = CType(.Columns("orig_log2").Value, String)
+                        If Not IsDBNull(.Columns("orig_log3").Value) Then mNewLog3 = CType(.Columns("orig_log3").Value, String)
+                        If Not IsDBNull(.Columns("orig_log4").Value) Then mNewLog4 = CType(.Columns("orig_log4").Value, String)
+                        If Not IsDBNull(.Columns("orig_log5").Value) Then mNewLog5 = CType(.Columns("orig_log5").Value, String)
+                        If Not IsDBNull(.Columns("orig_log6").Value) Then mNewLog6 = CType(.Columns("orig_log6").Value, String)
+                    End If
+                    Call Hide()
+                    Dim mForm As Form
+                    mForm = New frmDTRAdjustments
+                    mForm.ShowDialog()
+                    mForm.Dispose()
+                    Call Show()
+                    If mLogUpdated = True Then
+                        .Columns("log1").Value = Nothing
+                        .Columns("log2").Value = Nothing
+                        .Columns("log3").Value = Nothing
+                        .Columns("log4").Value = Nothing
+                        .Columns("log5").Value = Nothing
+                        .Columns("log6").Value = Nothing
+                        .Columns("edit_log1").Value = Nothing
+                        .Columns("edit_log2").Value = Nothing
+                        .Columns("edit_log3").Value = Nothing
+                        .Columns("edit_log4").Value = Nothing
+                        .Columns("edit_log5").Value = Nothing
+                        .Columns("edit_log6").Value = Nothing
+                        .Columns("isedited").Value = "Y"
+                        If Trim(mNewLog1) <> "" Then
+                            .Columns("log1").Value = Format(CType(mNewLog1, DateTime), "HH:mm")
+                            .Columns("edit_log1").Value = CType(mNewLog1, DateTime)
+                        End If
+                        If Trim(mNewLog2) <> "" Then
+                            .Columns("log2").Value = Format(CType(mNewLog2, DateTime), "HH:mm")
+                            .Columns("edit_log2").Value = CType(mNewLog2, DateTime)
+                        End If
+                        If Trim(mNewLog3) <> "" Then
+                            .Columns("log3").Value = Format(CType(mNewLog3, DateTime), "HH:mm")
+                            .Columns("edit_log3").Value = CType(mNewLog3, DateTime)
+                        End If
+                        If Trim(mNewLog4) <> "" Then
+                            .Columns("log4").Value = Format(CType(mNewLog4, DateTime), "HH:mm")
+                            .Columns("edit_log4").Value = CType(mNewLog4, DateTime)
+                        End If
+                        If Trim(mNewLog5) <> "" Then
+                            .Columns("log5").Value = Format(CType(mNewLog5, DateTime), "HH:mm")
+                            .Columns("edit_log5").Value = CType(mNewLog5, DateTime)
+                        End If
+                        If Trim(mNewLog6) <> "" Then
+                            .Columns("log6").Value = Format(CType(mNewLog6, DateTime), "HH:mm")
+                            .Columns("edit_log6").Value = CType(mNewLog6, DateTime)
+                        End If
+                    End If
+                End If
+            End With
+        End If
     End Sub
 
     Private Sub btnGenerateDTR_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateDTR.Click
