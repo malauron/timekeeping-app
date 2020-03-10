@@ -55,4 +55,9 @@
         End If
     End Sub
 
+    Private Sub txtSearch_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If e.KeyChar = Convert.ToChar(Keys.Enter) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
 End Class

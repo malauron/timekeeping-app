@@ -2010,7 +2010,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Biometric Software"
         "ProductCode" = "8:{2D344328-8457-4934-AF09-D83604026ADB}"
-        "PackageCode" = "8:{F34CEDAA-3FF4-421B-B719-170C1CAC0332}"
+        "PackageCode" = "8:{072E43BC-9BD5-494D-8B3C-A2A202A0C7D4}"
         "UpgradeCode" = "8:{F85163EB-EB0A-4D51-B924-8880B3807C6F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

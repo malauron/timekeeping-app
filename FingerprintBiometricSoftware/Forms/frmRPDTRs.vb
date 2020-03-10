@@ -14,13 +14,14 @@ Public Class frmRPDTRs
             .Items.Add("Description")
             .Text = "Description"
         End With
-        If NetOpen(myData, "select department_id,null isChecked,description from departments order by description", Cn.Connection) = True Then
+        If NetOpen(myData, "select department_id,1 isChecked,description from departments order by description", Cn.Connection) = True Then
             dgvDepartments.DataSource = myData
         End If
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         GroupBox1.Enabled = False
+
         If IsReportExist(SysParam.DTRReport) Then
             If Not (rpv.ReportSource Is Nothing) Then
                 rpv.ReportSource = Nothing
@@ -56,6 +57,8 @@ Public Class frmRPDTRs
                     Else
                         mAdquery = " and department_id =0 "
                     End If
+                Else
+                    mAdquery = " and department_id =0 "
                 End If
             End With
             myConnectionInfo.ServerName = ";DRIVER={MySQL ODBC 3.51 Driver};SERVER=" & Cn.Host & ";DATABASE=" & Cn.Database & ";UID=" & Cn.Username & ";PWD=" & Cn.Password & ";PORT=" & Cn.Port & ";OPTION=3"
@@ -75,4 +78,19 @@ Public Class frmRPDTRs
         GroupBox1.Enabled = True
     End Sub
 
+    Private Sub txtSearchDept_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchDept.KeyPress
+        If e.KeyChar = Convert.ToChar(Keys.Enter) Then
+            If NetOpen(myData, "select department_id,1 isChecked,description from departments where description like '%" & ConSwap(txtSearchDept.Text) & "%' order by description", Cn.Connection) = True Then
+                dgvDepartments.DataSource = myData
+            End If
+        End If
+    End Sub
+
+    Private Sub txtSearchDept_TextChanged(sender As Object, e As System.EventArgs) Handles txtSearchDept.TextChanged
+        If txtSearchDept.Text = "" Then
+            If NetOpen(myData, "select department_id,1 isChecked,description from departments order by description", Cn.Connection) = True Then
+                dgvDepartments.DataSource = myData
+            End If
+        End If
+    End Sub
 End Class

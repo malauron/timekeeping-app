@@ -292,6 +292,9 @@ Public Class frmImportDTR
                                     End If
                                 End If
                             Else
+                                If mColNum = 3 Or mColNum = 5 Then
+                                    mColNum = mColNum + 1
+                                End If
                                 If mColNum = 2 Or mColNum = 4 Or mColNum = 6 Then
                                     mCommand.CommandText = "update employee_dtrs set log" & mColNum & "='" & Format(CType(mLog.Item("datetime_log"), Date), "yyyy-MM-dd HH:mm:ss") & "' " & _
                                                     "where employee_id=" & CType(mEmpID.Item("employee_id"), String) & " and work_date='" & Format(mCurrDate, "yyyy-MM-dd") & "'"

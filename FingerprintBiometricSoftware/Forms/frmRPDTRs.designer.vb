@@ -27,6 +27,8 @@ Partial Class frmRPDTRs
         Me.cboCutoffPeriods = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtSearchDept = New C1.Win.C1Input.C1TextBox()
         Me.dgvDepartments = New System.Windows.Forms.DataGridView()
         Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.isChecked = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -36,6 +38,7 @@ Partial Class frmRPDTRs
         Me.btnView = New System.Windows.Forms.Button()
         Me.rpv = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.txtSearchDept, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvDepartments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -63,6 +66,8 @@ Partial Class frmRPDTRs
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.txtSearchDept)
         Me.GroupBox1.Controls.Add(Me.dgvDepartments)
         Me.GroupBox1.Controls.Add(Me.cboSortBy)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -74,6 +79,29 @@ Partial Class frmRPDTRs
         Me.GroupBox1.Size = New System.Drawing.Size(239, 493)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(9, 165)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(109, 15)
+        Me.Label2.TabIndex = 45
+        Me.Label2.Text = "Filter Departments"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtSearchDept
+        '
+        Me.txtSearchDept.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSearchDept.Font = New System.Drawing.Font("Calibri", 9.75!)
+        Me.txtSearchDept.Location = New System.Drawing.Point(9, 183)
+        Me.txtSearchDept.MaxLength = 20
+        Me.txtSearchDept.Name = "txtSearchDept"
+        Me.txtSearchDept.Size = New System.Drawing.Size(222, 21)
+        Me.txtSearchDept.TabIndex = 44
+        Me.txtSearchDept.Tag = Nothing
+        Me.txtSearchDept.TextDetached = True
         '
         'dgvDepartments
         '
@@ -134,7 +162,7 @@ Partial Class frmRPDTRs
         Me.cboSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSortBy.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboSortBy.FormattingEnabled = True
-        Me.cboSortBy.Location = New System.Drawing.Point(6, 161)
+        Me.cboSortBy.Location = New System.Drawing.Point(6, 461)
         Me.cboSortBy.Name = "cboSortBy"
         Me.cboSortBy.Size = New System.Drawing.Size(226, 23)
         Me.cboSortBy.TabIndex = 37
@@ -143,7 +171,7 @@ Partial Class frmRPDTRs
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(9, 140)
+        Me.Label1.Location = New System.Drawing.Point(9, 440)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(46, 23)
         Me.Label1.TabIndex = 36
@@ -198,6 +226,7 @@ Partial Class frmRPDTRs
         Me.Text = "DTRs"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.txtSearchDept, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvDepartments, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -213,4 +242,6 @@ Partial Class frmRPDTRs
     Friend WithEvents department_id As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents isChecked As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtSearchDept As C1.Win.C1Input.C1TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
 End Class

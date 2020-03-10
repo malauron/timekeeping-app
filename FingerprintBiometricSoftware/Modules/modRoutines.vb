@@ -32,6 +32,7 @@ Module modRoutines
                     SysParam.FlexiBreakHours = CType(mRow.Item("flexibreak_hrs"), Double)
                     SysParam.NextDayMinuteDifference = CType(mRow.Item("nextDayMinDiff"), Double)
                     SysParam.EditDTREntry = CType(mRow.Item("editDTR"), Boolean)
+                    SysParam.ExportDTRSummary = CType(mRow.Item("exportDTR"), Boolean)
 
                 Next
             End If
@@ -517,7 +518,7 @@ Module modRoutines
 
                         Else
 
-                            If Not IsDBNull(mDTR.Item("log2")) And Not IsDBNull("log3") Then
+                            If Not IsDBNull(mDTR.Item("log2")) And Not IsDBNull(mDTR.Item("log3")) Then
                                 computeSched(mDTR.Item("work_date"), mDTR.Item("sched1"), mDTR.Item("sched1"), mDTR.Item("sched2"), mDTR.Item("log1"), mDTR.Item("log4"), mLate, mUndertime, mGracePeriod, mRoundMinutes, mSchedStatus)
                                 If mSchedStatus = ScheduleStatus.Computed Then
                                     mDaysWork = 1
@@ -734,7 +735,6 @@ Module modRoutines
         Dim mOutSched As DateTime
         Dim mLtUTTemp As Double = mLtUt
         
-
         Try
             mLtUt = 0
             'mInSched = CType(Format(mWordDate, "MM/dd/yyyy") & " " & mRawInSched.ToString, DateTime)
@@ -749,6 +749,71 @@ Module modRoutines
             mLtUt = (CType(DateDiff(DateInterval.Minute, mInSched, mOutSched), Double) / 60) + mLtUTTemp
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Computing Late/UT Error!")
+        End Try
+    End Sub
+
+    Public Sub exportDTR(ByVal employeeID As Integer, ByVal mDateFrom As Date, ByVal mDateUntil As Date, ByVal cutoff_period_id As Integer, ByVal payType As String)
+        Dim mTrans As MySqlTransaction
+        Dim mCommand As New MySqlCommand
+        Dim dtrSummary As New DataTable
+
+        mTrans = Cn.Connection.BeginTransaction
+
+        Try
+            If NetOpen(dtrSummary, "SELECT SUM(days_wrkd) dayswork,SUM(days_absent) absdays, " & _
+                                   "SUM(late) late,SUM(undertime) undertime," & _
+                                   "SUM(reg_holiday) legdays,SUM(spc_holiday) spcdays " & _
+                                   "FROM dtr_summary " & _
+                                   "WHERE employee_id=" & employeeID & " " & _
+                                   "AND work_date BETWEEN '" & Format(mDateFrom, "yyyy-MM-dd") & "' AND '" & Format(mDateUntil, "yyyy-MM-dd") & "' " & _
+                                   "GROUP BY employee_id") Then
+
+                If dtrSummary.Rows.Count > 0 Then
+                    mCommand.Transaction = mTrans
+                    mCommand.Connection = Cn.Connection
+                    mCommand.Parameters.AddWithValue("@employee_id", employeeID)
+                    mCommand.Parameters.AddWithValue("@cutoffPeriodID", cutoff_period_id)
+                    For Each sumRow As DataRow In dtrSummary.Rows
+
+                        mCommand.Parameters.AddWithValue("@daysWork", IIf(payType = "D", CType(sumRow.Item("dayswork"), Double), 0))
+                        mCommand.Parameters.AddWithValue("@absDays", IIf(payType = "M", CType(sumRow.Item("absdays"), Double), 0))
+                        mCommand.Parameters.AddWithValue("@late", CType(sumRow.Item("late"), Double))
+                        mCommand.Parameters.AddWithValue("@undertime", CType(sumRow.Item("undertime"), Double))
+                        mCommand.Parameters.AddWithValue("@legDays", CType(sumRow.Item("legdays"), Double))
+                        mCommand.Parameters.AddWithValue("@spcDays", CType(sumRow.Item("spcdays"), Double))
+                        mCommand.CommandText = "insert into " & SysParam.PayrollDatabase & ".dtr " & _
+                                    "(employeecode,percode,dayswork,absdays,late,undertime,legdays,spcdays) values (" & _
+                                    "@employee_id,@cutoffPeriodID,@daysWork,@absDays,@late,@undertime,@legDays,@spcDays) on duplicate key update " & _
+                                    "dayswork=@daysWork,absdays=@absDays,late=@late,undertime=@undertime,legdays=@legDays,spcdays=@spcDays "
+                        mCommand.ExecuteNonQuery()
+                    Next
+                End If
+
+            End If
+
+            mTrans.Commit()
+        Catch ex As MySqlException
+            If Not (mTrans Is Nothing) Then
+                mTrans.Rollback()
+            End If
+            'MsgBox(ex.Message & " " & ex.ToString, MsgBoxStyle.Critical, "Computing DTR Error!")
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Exporting DTR error!")
+        Catch ex As Exception
+            If Not (mTrans Is Nothing) Then
+                mTrans.Rollback()
+            End If
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Exporting DTR error!")
+            'MsgBox(ex.Message & " " & ex.ToString, MsgBoxStyle.Critical, "Computing DTR Error!")
+        Finally
+            Try
+                mCommand.Dispose()
+                mTrans.Dispose()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Exporting DTR error!")
+                'MsgBox(ex.Message & " " & ex.ToString, MsgBoxStyle.Exclamation, "Computing DTR Error!")
+            Finally
+
+            End Try
         End Try
     End Sub
 

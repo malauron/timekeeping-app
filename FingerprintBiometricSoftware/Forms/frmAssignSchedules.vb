@@ -127,7 +127,10 @@ Public Class frmAssignSchedules
                 End If
             End With
             mTrans.Commit()
-
+            ComputeDTR(CType(txtEmployeeName.Tag, Integer), mDateFrom, mDateUntil, mDepartment_ID)
+            If SysParam.ExportDTRSummary Then
+                exportDTR(CType(txtEmployeeName.Tag, Integer), mDateFrom, mDateUntil, CType(txtCutoffPeriod.Tag, Integer), mPayType)
+            End If
             MsgBox("Information has been succesfully saved!", MsgBoxStyle.Information)
         Catch ex As MySqlException
             If Not (mTrans Is Nothing) Then
@@ -146,7 +149,7 @@ Public Class frmAssignSchedules
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             Finally
-                ComputeDTR(CType(txtEmployeeName.Tag, Integer), mDateFrom, mDateUntil, mDepartment_ID)
+                'ComputeDTR(CType(txtEmployeeName.Tag, Integer), mDateFrom, mDateUntil, mDepartment_ID)
                 btnSave.Enabled = True
             End Try
         End Try
@@ -339,4 +342,5 @@ Public Class frmAssignSchedules
         End If
 
     End Sub
+
 End Class

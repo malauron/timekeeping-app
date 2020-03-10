@@ -29,18 +29,18 @@ Partial Class frmImportDTR
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.gbxEmployeeInfo = New System.Windows.Forms.GroupBox()
+        Me.lblPortNo = New System.Windows.Forms.Label()
+        Me.lblIPAddress = New System.Windows.Forms.Label()
+        Me.optDevice = New System.Windows.Forms.RadioButton()
+        Me.optFile = New System.Windows.Forms.RadioButton()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblPath = New System.Windows.Forms.Label()
         Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.ofdLogs = New System.Windows.Forms.OpenFileDialog()
         Me.chk = New System.Windows.Forms.CheckBox()
-        Me.optFile = New System.Windows.Forms.RadioButton()
-        Me.optDevice = New System.Windows.Forms.RadioButton()
-        Me.lblIPAddress = New System.Windows.Forms.Label()
-        Me.lblPortNo = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.gbxEmployeeInfo.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -126,6 +126,44 @@ Partial Class frmImportDTR
         Me.gbxEmployeeInfo.TabIndex = 44
         Me.gbxEmployeeInfo.TabStop = False
         '
+        'lblPortNo
+        '
+        Me.lblPortNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblPortNo.Location = New System.Drawing.Point(447, 15)
+        Me.lblPortNo.Name = "lblPortNo"
+        Me.lblPortNo.Size = New System.Drawing.Size(70, 26)
+        Me.lblPortNo.TabIndex = 211
+        '
+        'lblIPAddress
+        '
+        Me.lblIPAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblIPAddress.Location = New System.Drawing.Point(221, 15)
+        Me.lblIPAddress.Name = "lblIPAddress"
+        Me.lblIPAddress.Size = New System.Drawing.Size(182, 26)
+        Me.lblIPAddress.TabIndex = 210
+        '
+        'optDevice
+        '
+        Me.optDevice.AutoSize = True
+        Me.optDevice.Location = New System.Drawing.Point(11, 17)
+        Me.optDevice.Name = "optDevice"
+        Me.optDevice.Size = New System.Drawing.Size(119, 24)
+        Me.optDevice.TabIndex = 209
+        Me.optDevice.Text = "From Device"
+        Me.optDevice.UseVisualStyleBackColor = True
+        '
+        'optFile
+        '
+        Me.optFile.AutoSize = True
+        Me.optFile.Checked = True
+        Me.optFile.Location = New System.Drawing.Point(11, 46)
+        Me.optFile.Name = "optFile"
+        Me.optFile.Size = New System.Drawing.Size(93, 24)
+        Me.optFile.TabIndex = 208
+        Me.optFile.TabStop = True
+        Me.optFile.Text = "From File"
+        Me.optFile.UseVisualStyleBackColor = True
+        '
         'ProgressBar1
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(6, 107)
@@ -160,6 +198,26 @@ Partial Class frmImportDTR
         Me.dtpDateFrom.Size = New System.Drawing.Size(115, 27)
         Me.dtpDateFrom.TabIndex = 203
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(408, 18)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(40, 20)
+        Me.Label5.TabIndex = 213
+        Me.Label5.Text = "Port"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(134, 18)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(90, 20)
+        Me.Label4.TabIndex = 212
+        Me.Label4.Text = "IP Address"
+        '
         'ofdLogs
         '
         Me.ofdLogs.Filter = "DAT Files (*.dat)|*.dat"
@@ -174,65 +232,6 @@ Partial Class frmImportDTR
         Me.chk.TabIndex = 125
         Me.chk.Text = "1=IN,Otherwise OUT"
         Me.chk.UseVisualStyleBackColor = True
-        Me.chk.Visible = False
-        '
-        'optFile
-        '
-        Me.optFile.AutoSize = True
-        Me.optFile.Checked = True
-        Me.optFile.Location = New System.Drawing.Point(11, 46)
-        Me.optFile.Name = "optFile"
-        Me.optFile.Size = New System.Drawing.Size(93, 24)
-        Me.optFile.TabIndex = 208
-        Me.optFile.TabStop = True
-        Me.optFile.Text = "From File"
-        Me.optFile.UseVisualStyleBackColor = True
-        '
-        'optDevice
-        '
-        Me.optDevice.AutoSize = True
-        Me.optDevice.Location = New System.Drawing.Point(11, 17)
-        Me.optDevice.Name = "optDevice"
-        Me.optDevice.Size = New System.Drawing.Size(119, 24)
-        Me.optDevice.TabIndex = 209
-        Me.optDevice.Text = "From Device"
-        Me.optDevice.UseVisualStyleBackColor = True
-        '
-        'lblIPAddress
-        '
-        Me.lblIPAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblIPAddress.Location = New System.Drawing.Point(221, 15)
-        Me.lblIPAddress.Name = "lblIPAddress"
-        Me.lblIPAddress.Size = New System.Drawing.Size(182, 26)
-        Me.lblIPAddress.TabIndex = 210
-        '
-        'lblPortNo
-        '
-        Me.lblPortNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblPortNo.Location = New System.Drawing.Point(447, 15)
-        Me.lblPortNo.Name = "lblPortNo"
-        Me.lblPortNo.Size = New System.Drawing.Size(70, 26)
-        Me.lblPortNo.TabIndex = 211
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(134, 18)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(90, 20)
-        Me.Label4.TabIndex = 212
-        Me.Label4.Text = "IP Address"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(408, 18)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(40, 20)
-        Me.Label5.TabIndex = 213
-        Me.Label5.Text = "Port"
         '
         'frmImportDTR
         '

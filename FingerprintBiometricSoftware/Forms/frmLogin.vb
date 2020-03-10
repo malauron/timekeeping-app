@@ -99,4 +99,16 @@ Public Class frmLogin
         End If
         Call Show()
     End Sub
+
+    Private Sub txtUsername_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtUsername.KeyPress
+        If e.KeyChar = Convert.ToChar(Keys.Enter) Then
+            txtPassword.Focus()
+        End If
+    End Sub
+
+    Private Sub txtPassword_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+        If e.KeyChar = Convert.ToChar(Keys.Enter) Then
+            btnOK.Focus()
+        End If
+    End Sub
 End Class
