@@ -66,7 +66,7 @@ Public Class frmEmployeeInfo
                     Call Clear_Fields()
                     For Each drEmployee As DataRow In dtEmployees.Rows
                         mEmployee_ID = mSearchID
-                        txtCode.Value = CType(drEmployee.Item("employee_bio_id"), Integer)
+                        txtCode.Value = CType(drEmployee.Item("employee_bio_id"), String)
                         txtLastname.Text = CType(drEmployee.Item("lastname"), String)
                         txtFirstname.Text = CType(drEmployee.Item("firstname"), String)
                         txtMiddlename.Text = CType(drEmployee.Item("middlename"), String)

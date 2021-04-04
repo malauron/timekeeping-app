@@ -16,4 +16,6 @@ Module modPublicVariables
     Public mNewLog5 As String = ""
     Public mNewLog6 As String = ""
     Public mLogUpdated As Boolean = False
+    Public dateStartWork As Date
+    Public dateEndWork As Date
 End Module

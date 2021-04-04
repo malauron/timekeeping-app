@@ -29,6 +29,13 @@ Partial Class frmDTRAdjustments
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.gbxEmployeeInfo = New System.Windows.Forms.GroupBox()
+        Me.lb = New System.Windows.Forms.ListBox()
+        Me.btnOut03 = New System.Windows.Forms.Button()
+        Me.btnIn03 = New System.Windows.Forms.Button()
+        Me.btnOut02 = New System.Windows.Forms.Button()
+        Me.btnIn02 = New System.Windows.Forms.Button()
+        Me.btnOut01 = New System.Windows.Forms.Button()
+        Me.btnIn01 = New System.Windows.Forms.Button()
         Me.txt3rd_outsched = New C1.Win.C1Input.C1DateEdit()
         Me.txt3rd_insched = New C1.Win.C1Input.C1DateEdit()
         Me.txt2nd_outsched = New C1.Win.C1Input.C1DateEdit()
@@ -86,7 +93,7 @@ Partial Class frmDTRAdjustments
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(70, 34)
+        Me.Label2.Location = New System.Drawing.Point(63, 34)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(141, 20)
         Me.Label2.TabIndex = 109
@@ -96,7 +103,7 @@ Partial Class frmDTRAdjustments
         'Label13
         '
         Me.Label13.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(217, 34)
+        Me.Label13.Location = New System.Drawing.Point(237, 34)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(141, 20)
         Me.Label13.TabIndex = 131
@@ -106,6 +113,13 @@ Partial Class frmDTRAdjustments
         'gbxEmployeeInfo
         '
         Me.gbxEmployeeInfo.BackColor = System.Drawing.Color.Transparent
+        Me.gbxEmployeeInfo.Controls.Add(Me.lb)
+        Me.gbxEmployeeInfo.Controls.Add(Me.btnOut03)
+        Me.gbxEmployeeInfo.Controls.Add(Me.btnIn03)
+        Me.gbxEmployeeInfo.Controls.Add(Me.btnOut02)
+        Me.gbxEmployeeInfo.Controls.Add(Me.btnIn02)
+        Me.gbxEmployeeInfo.Controls.Add(Me.btnOut01)
+        Me.gbxEmployeeInfo.Controls.Add(Me.btnIn01)
         Me.gbxEmployeeInfo.Controls.Add(Me.txt3rd_outsched)
         Me.gbxEmployeeInfo.Controls.Add(Me.txt3rd_insched)
         Me.gbxEmployeeInfo.Controls.Add(Me.txt2nd_outsched)
@@ -122,6 +136,100 @@ Partial Class frmDTRAdjustments
         Me.gbxEmployeeInfo.Size = New System.Drawing.Size(408, 201)
         Me.gbxEmployeeInfo.TabIndex = 44
         Me.gbxEmployeeInfo.TabStop = False
+        '
+        'lb
+        '
+        Me.lb.FormatString = "g"
+        Me.lb.ItemHeight = 20
+        Me.lb.Location = New System.Drawing.Point(63, 155)
+        Me.lb.Name = "lb"
+        Me.lb.Size = New System.Drawing.Size(156, 84)
+        Me.lb.TabIndex = 229
+        Me.lb.Visible = False
+        '
+        'btnOut03
+        '
+        Me.btnOut03.BackgroundImage = CType(resources.GetObject("btnOut03.BackgroundImage"), System.Drawing.Image)
+        Me.btnOut03.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnOut03.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnOut03.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOut03.ForeColor = System.Drawing.Color.Black
+        Me.btnOut03.Location = New System.Drawing.Point(377, 121)
+        Me.btnOut03.Name = "btnOut03"
+        Me.btnOut03.Size = New System.Drawing.Size(26, 26)
+        Me.btnOut03.TabIndex = 228
+        Me.btnOut03.TabStop = False
+        Me.btnOut03.UseVisualStyleBackColor = True
+        '
+        'btnIn03
+        '
+        Me.btnIn03.BackgroundImage = CType(resources.GetObject("btnIn03.BackgroundImage"), System.Drawing.Image)
+        Me.btnIn03.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnIn03.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnIn03.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnIn03.ForeColor = System.Drawing.Color.Black
+        Me.btnIn03.Location = New System.Drawing.Point(203, 121)
+        Me.btnIn03.Name = "btnIn03"
+        Me.btnIn03.Size = New System.Drawing.Size(26, 26)
+        Me.btnIn03.TabIndex = 227
+        Me.btnIn03.TabStop = False
+        Me.btnIn03.UseVisualStyleBackColor = True
+        '
+        'btnOut02
+        '
+        Me.btnOut02.BackgroundImage = CType(resources.GetObject("btnOut02.BackgroundImage"), System.Drawing.Image)
+        Me.btnOut02.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnOut02.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnOut02.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOut02.ForeColor = System.Drawing.Color.Black
+        Me.btnOut02.Location = New System.Drawing.Point(377, 89)
+        Me.btnOut02.Name = "btnOut02"
+        Me.btnOut02.Size = New System.Drawing.Size(26, 26)
+        Me.btnOut02.TabIndex = 226
+        Me.btnOut02.TabStop = False
+        Me.btnOut02.UseVisualStyleBackColor = True
+        '
+        'btnIn02
+        '
+        Me.btnIn02.BackgroundImage = CType(resources.GetObject("btnIn02.BackgroundImage"), System.Drawing.Image)
+        Me.btnIn02.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnIn02.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnIn02.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnIn02.ForeColor = System.Drawing.Color.Black
+        Me.btnIn02.Location = New System.Drawing.Point(203, 89)
+        Me.btnIn02.Name = "btnIn02"
+        Me.btnIn02.Size = New System.Drawing.Size(26, 26)
+        Me.btnIn02.TabIndex = 225
+        Me.btnIn02.TabStop = False
+        Me.btnIn02.UseVisualStyleBackColor = True
+        '
+        'btnOut01
+        '
+        Me.btnOut01.BackgroundImage = CType(resources.GetObject("btnOut01.BackgroundImage"), System.Drawing.Image)
+        Me.btnOut01.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnOut01.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnOut01.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOut01.ForeColor = System.Drawing.Color.Black
+        Me.btnOut01.Location = New System.Drawing.Point(377, 57)
+        Me.btnOut01.Name = "btnOut01"
+        Me.btnOut01.Size = New System.Drawing.Size(26, 26)
+        Me.btnOut01.TabIndex = 224
+        Me.btnOut01.TabStop = False
+        Me.btnOut01.UseVisualStyleBackColor = True
+        '
+        'btnIn01
+        '
+        Me.btnIn01.BackgroundImage = CType(resources.GetObject("btnIn01.BackgroundImage"), System.Drawing.Image)
+        Me.btnIn01.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnIn01.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnIn01.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnIn01.ForeColor = System.Drawing.Color.Black
+        Me.btnIn01.Location = New System.Drawing.Point(203, 57)
+        Me.btnIn01.Name = "btnIn01"
+        Me.btnIn01.Size = New System.Drawing.Size(26, 26)
+        Me.btnIn01.TabIndex = 223
+        Me.btnIn01.TabStop = False
+        Me.btnIn01.UseVisualStyleBackColor = True
         '
         'txt3rd_outsched
         '
@@ -143,7 +251,7 @@ Partial Class frmDTRAdjustments
             Or C1.Win.C1Input.FormatInfoInheritFlags.TrimEnd), C1.Win.C1Input.FormatInfoInheritFlags)
         Me.txt3rd_outsched.EmptyAsNull = True
         Me.txt3rd_outsched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
-        Me.txt3rd_outsched.Location = New System.Drawing.Point(217, 121)
+        Me.txt3rd_outsched.Location = New System.Drawing.Point(237, 121)
         Me.txt3rd_outsched.Name = "txt3rd_outsched"
         Me.txt3rd_outsched.Size = New System.Drawing.Size(141, 26)
         Me.txt3rd_outsched.TabIndex = 222
@@ -170,7 +278,7 @@ Partial Class frmDTRAdjustments
             Or C1.Win.C1Input.FormatInfoInheritFlags.TrimEnd), C1.Win.C1Input.FormatInfoInheritFlags)
         Me.txt3rd_insched.EmptyAsNull = True
         Me.txt3rd_insched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
-        Me.txt3rd_insched.Location = New System.Drawing.Point(70, 121)
+        Me.txt3rd_insched.Location = New System.Drawing.Point(63, 121)
         Me.txt3rd_insched.Name = "txt3rd_insched"
         Me.txt3rd_insched.Size = New System.Drawing.Size(141, 26)
         Me.txt3rd_insched.TabIndex = 221
@@ -197,7 +305,7 @@ Partial Class frmDTRAdjustments
             Or C1.Win.C1Input.FormatInfoInheritFlags.TrimEnd), C1.Win.C1Input.FormatInfoInheritFlags)
         Me.txt2nd_outsched.EmptyAsNull = True
         Me.txt2nd_outsched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
-        Me.txt2nd_outsched.Location = New System.Drawing.Point(217, 89)
+        Me.txt2nd_outsched.Location = New System.Drawing.Point(237, 89)
         Me.txt2nd_outsched.Name = "txt2nd_outsched"
         Me.txt2nd_outsched.Size = New System.Drawing.Size(141, 26)
         Me.txt2nd_outsched.TabIndex = 220
@@ -224,7 +332,7 @@ Partial Class frmDTRAdjustments
             Or C1.Win.C1Input.FormatInfoInheritFlags.TrimEnd), C1.Win.C1Input.FormatInfoInheritFlags)
         Me.txt2nd_insched.EmptyAsNull = True
         Me.txt2nd_insched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
-        Me.txt2nd_insched.Location = New System.Drawing.Point(70, 89)
+        Me.txt2nd_insched.Location = New System.Drawing.Point(63, 89)
         Me.txt2nd_insched.Name = "txt2nd_insched"
         Me.txt2nd_insched.Size = New System.Drawing.Size(141, 26)
         Me.txt2nd_insched.TabIndex = 219
@@ -251,7 +359,7 @@ Partial Class frmDTRAdjustments
             Or C1.Win.C1Input.FormatInfoInheritFlags.TrimEnd), C1.Win.C1Input.FormatInfoInheritFlags)
         Me.txt1st_outsched.EmptyAsNull = True
         Me.txt1st_outsched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
-        Me.txt1st_outsched.Location = New System.Drawing.Point(217, 57)
+        Me.txt1st_outsched.Location = New System.Drawing.Point(237, 57)
         Me.txt1st_outsched.Name = "txt1st_outsched"
         Me.txt1st_outsched.Size = New System.Drawing.Size(141, 26)
         Me.txt1st_outsched.TabIndex = 218
@@ -261,7 +369,7 @@ Partial Class frmDTRAdjustments
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(14, 123)
+        Me.Label5.Location = New System.Drawing.Point(7, 123)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(50, 20)
         Me.Label5.TabIndex = 217
@@ -271,7 +379,7 @@ Partial Class frmDTRAdjustments
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(14, 91)
+        Me.Label4.Location = New System.Drawing.Point(7, 91)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(50, 20)
         Me.Label4.TabIndex = 216
@@ -281,7 +389,7 @@ Partial Class frmDTRAdjustments
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("HelveticaNeueLT Com 45 Lt", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(14, 59)
+        Me.Label3.Location = New System.Drawing.Point(7, 59)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(50, 20)
         Me.Label3.TabIndex = 215
@@ -308,7 +416,7 @@ Partial Class frmDTRAdjustments
             Or C1.Win.C1Input.FormatInfoInheritFlags.TrimEnd), C1.Win.C1Input.FormatInfoInheritFlags)
         Me.txt1st_insched.EmptyAsNull = True
         Me.txt1st_insched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
-        Me.txt1st_insched.Location = New System.Drawing.Point(70, 57)
+        Me.txt1st_insched.Location = New System.Drawing.Point(63, 57)
         Me.txt1st_insched.Name = "txt1st_insched"
         Me.txt1st_insched.Size = New System.Drawing.Size(141, 26)
         Me.txt1st_insched.TabIndex = 201
@@ -357,4 +465,11 @@ Partial Class frmDTRAdjustments
     Friend WithEvents txt2nd_outsched As C1.Win.C1Input.C1DateEdit
     Friend WithEvents txt2nd_insched As C1.Win.C1Input.C1DateEdit
     Friend WithEvents txt1st_outsched As C1.Win.C1Input.C1DateEdit
+    Friend WithEvents btnOut03 As System.Windows.Forms.Button
+    Friend WithEvents btnIn03 As System.Windows.Forms.Button
+    Friend WithEvents btnOut02 As System.Windows.Forms.Button
+    Friend WithEvents btnIn02 As System.Windows.Forms.Button
+    Friend WithEvents btnOut01 As System.Windows.Forms.Button
+    Friend WithEvents btnIn01 As System.Windows.Forms.Button
+    Friend WithEvents lb As System.Windows.Forms.ListBox
 End Class

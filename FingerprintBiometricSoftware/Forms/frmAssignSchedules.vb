@@ -252,6 +252,9 @@ Public Class frmAssignSchedules
                 If (CType(.Columns(.Col).DataField, String) = "log1" Or CType(.Columns(.Col).DataField, String) = "log2" Or CType(.Columns(.Col).DataField, String) = "log3" Or _
                     CType(.Columns(.Col).DataField, String) = "log4" Or CType(.Columns(.Col).DataField, String) = "log5" Or CType(.Columns(.Col).DataField, String) = "log6") Then 'And CType(User.UserID, Integer) = 1 Then
 
+                    mSearchID = CType(txtEmployeeName.Tag, Integer)
+                    dateStartWork = CType(.Columns("work_date").Value, Date)
+                    dateEndWork = DateAdd(DateInterval.Day, 2, dateStartWork)
                     mNewLog1 = ""
                     mNewLog2 = ""
                     mNewLog3 = ""

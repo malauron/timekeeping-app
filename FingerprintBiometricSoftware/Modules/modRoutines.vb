@@ -517,14 +517,13 @@ Module modRoutines
                             End If
 
                         Else
-
+                            
                             If Not IsDBNull(mDTR.Item("log2")) And Not IsDBNull(mDTR.Item("log3")) Then
                                 computeSched(mDTR.Item("work_date"), mDTR.Item("sched1"), mDTR.Item("sched1"), mDTR.Item("sched2"), mDTR.Item("log1"), mDTR.Item("log4"), mLate, mUndertime, mGracePeriod, mRoundMinutes, mSchedStatus)
                                 If mSchedStatus = ScheduleStatus.Computed Then
                                     mDaysWork = 1
                                     mHrsWrkd = mRegHrs
                                     Dim tempLates As Double = mLate
-                                    'mLate = CType(DateDiff(DateInterval.Minute, CType(Format(mDTR.Item("log2"), "MM/dd/yyyy HH:mm"), DateTime), CType(Format(mDTR.Item("log3"), "MM/dd/yyyy HH:mm"), DateTime)), Double)
                                     mLate = CType(DateDiff(DateInterval.Minute, CType(mDTR.Item("log2"), DateTime), CType(mDTR.Item("log3"), DateTime)), Double)
                                     If mLate > (SysParam.FlexiBreakHours * 60) Then
 
@@ -554,7 +553,17 @@ Module modRoutines
                                     mDaysAbsent = 1
                                 End If
                             Else
-                                mDaysAbsent = 1
+                                computeSched(mDTR.Item("work_date"), mDTR.Item("sched1"), mDTR.Item("sched1"), mDTR.Item("sched2"), mDTR.Item("log1"), mDTR.Item("log2"), mLate, mUndertime, mGracePeriod, mRoundMinutes, mSchedStatus)
+                                If mSchedStatus = ScheduleStatus.Computed Then
+                                    mDaysWork = 1
+                                    mHrsWrkd = mRegHrs
+                                Else
+                                    mDaysAbsent = 1
+                                End If
+                                'Disabel Temporarily For COVID-19 Payroll
+                                '*****************************************************************
+                                'mDaysAbsent = 1
+                                '*****************************************************************
                             End If
                             
 

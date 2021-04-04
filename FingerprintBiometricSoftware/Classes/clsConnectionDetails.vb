@@ -69,7 +69,8 @@ Public NotInheritable Class clsConnectionDetails
                 & "Uid=" & vUsername & ";" _
                 & "Pwd=" & vPassword & ";" _
                 & "Port=" & vPort & ";" _
-                & "database=" & vDatabase & ""
+                & "database=" & vDatabase & ";" _
+                & "Allow User Variables=True"
 
         Try
             vConnection.Open()
