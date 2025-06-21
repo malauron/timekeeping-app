@@ -14,6 +14,7 @@
     Private flexiBreakHoursValue As Double
     Private nextDayMinDiff As Double
     Private editDTR As Boolean
+    Private editDateTime As Boolean
     Private exportDTR As Boolean
 
     Public Property GracePeriod() As Integer
@@ -139,6 +140,15 @@
         End Get
         Set(value As Boolean)
             editDTR = value
+        End Set
+    End Property
+
+    Public Property EditDateTimeEntry() As Boolean
+        Get
+            Return editDateTime
+        End Get
+        Set(value As Boolean)
+            editDateTime = value
         End Set
     End Property
 

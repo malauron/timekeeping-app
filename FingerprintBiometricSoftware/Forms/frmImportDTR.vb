@@ -50,6 +50,8 @@ Public Class frmImportDTR
         Dim idwWorkcode As Integer
         Dim idwErrorCode As Integer
 
+        Dim bioIDs As New ArrayList()
+
         If optFile.Checked Then
             With My.Computer.FileSystem
                 If Trim(lblPath.Text) <> "" Then
@@ -119,6 +121,10 @@ Public Class frmImportDTR
                                 End If
                             End If
 
+                            If Not (bioIDs.Contains(CType(Trim(mIDs), String))) Then
+                                bioIDs.Add(CType(Trim(mIDs), String))
+                            End If
+
                             mCommand.CommandText = "insert into employee_logs(employee_bio_id,datetime_log,log_status) values ('" & CType(Trim(mIDs), String) & "'," & _
                                                            "'" & Format(CType(mDateTime, Date), "yyyy-MM-dd HH:mm:ss") & "'," & mLogStat & ") " & _
                                                            "on duplicate key update log_status= " & mLogStat & ""
@@ -166,21 +172,41 @@ Public Class frmImportDTR
 
             End If
 
-            mCommand.CommandText = "update employee_logs set employee_id = (select employee_id from employees where employee_bio_id = employee_logs.employee_bio_id);"
-            mCommand.ExecuteNonQuery()
+            Dim arrayResult As String = ""
+            For Each bioID As String In bioIDs
+                If bioIDs.IndexOf(bioID) < bioIDs.Count - 1 Then
+                    arrayResult &= "'" & bioID & "', "
+                Else
+                    arrayResult &= "'" & bioID & "'"
+                End If
+
+            Next
+
+            'MsgBox(arrayResult)
 
             mTrans.Commit()
-            Call Create_DTR()
-            If NetOpen(dtEmployees, "select a.employee_id,b.department_id from " & _
-                                "(select employee_id from employee_dtrs where work_date BETWEEN '" & Format(dtpDateFrom.Value.Date, "yyyy-MM-dd") & "' AND '" & Format(Now.Date, "yyyy-MM-dd") & "' group by employee_id) a " & _
-                                "left outer join employees b on a.employee_id=b.employee_id") Then
+
+            Call Create_DTR(arrayResult)
+
+            ProgressBar1.Value = 0
+
+            'If NetOpen(dtEmployees, "select a.employee_id,b.department_id from " & _
+            '                    "(select employee_id from employee_dtrs " & _
+            '                    "where work_date BETWEEN '" & Format(dtpDateFrom.Value.Date, "yyyy-MM-dd") & "' AND '" & Format(Now.Date, "yyyy-MM-dd") & "' group by employee_id) a " & _
+            '                    "left outer join employees b on a.employee_id=b.employee_id " & _
+            '                    "where b.employee_bio_id in (" & arrayResult & ")") Then
+
+            If NetOpen(dtEmployees, "select employee_id,department_id from employees where employee_bio_id in (" & arrayResult & ")") Then
+                ProgressBar1.Maximum = dtEmployees.Rows.Count
                 If dtEmployees.Rows.Count > 0 Then
                     For Each mEmpIDs As DataRow In dtEmployees.Rows
+                        ProgressBar1.Value = ProgressBar1.Value + 1
                         'MsgBox(dtpDateFrom.Value & "  -   " & Now.Date)                        
                         ComputeDTR(CType(mEmpIDs.Item("employee_id"), Integer), dtpDateFrom.Value.Date, Now.Date, CType(mEmpIDs.Item("department_id"), Integer))
                     Next
                 End If
             End If
+
             MsgBox("Upload complete!", MsgBoxStyle.Information)
         Catch ex As MySqlException
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Importing DTR Error!")
@@ -206,7 +232,7 @@ Public Class frmImportDTR
         End Try
     End Sub
 
-    Private Sub Create_DTR()
+    Private Sub Create_DTR(ByVal bioIDs As String)
 
         Dim mTrans As MySqlTransaction
         Dim mCommand As New MySqlCommand
@@ -229,21 +255,37 @@ Public Class frmImportDTR
             mCommand.Transaction = mTrans
             mCommand.Connection = Cn.Connection
 
-            'delete existing dtrs for the selected period
-            mCommand.CommandText = "delete from employee_dtrs where work_date >= '" & Format(mDateFrom, "yyyy-MM-dd") & "'"
+            mCommand.CommandText = "update employee_logs set employee_id = (select employee_id from employees " & _
+                                                                           "where employee_bio_id = employee_logs.employee_bio_id) " & _
+                                    "where employee_bio_id in (" & bioIDs & ")"
             mCommand.ExecuteNonQuery()
-            mCommand.CommandText = "delete from schedules_assignment where work_date >= '" & Format(mDateFrom, "yyyy-MM-dd") & "' and schedule_id=0"
+
+            'delete existing dtrs for the selected period
+            mCommand.CommandText = "delete from employee_dtrs where work_date >= '" & Format(mDateFrom, "yyyy-MM-dd") & "' " & _
+                                    "and employee_id in (select employee_id from employees where employee_bio_id in (" & bioIDs & ")) "
+            mCommand.ExecuteNonQuery()
+            mCommand.CommandText = "delete from schedules_assignment where work_date >= '" & Format(mDateFrom, "yyyy-MM-dd") & "' and schedule_id=0 " & _
+                                    "and employee_id in (select employee_id from employees where employee_bio_id in (" & bioIDs & ")) "
             mCommand.ExecuteNonQuery()
             mCommand.CommandText = "update schedules_assignment set department_id=(select department_id from employees where employee_id=schedules_assignment.employee_id) " & _
-                                                "where work_date >= '" & Format(mDateFrom, "yyyy-MM-dd") & "'"
+                                    "where work_date >= '" & Format(mDateFrom, "yyyy-MM-dd") & "' " & _
+                                    "and employee_id in (select employee_id from employees where employee_bio_id in (" & bioIDs & ")) "
             mCommand.ExecuteNonQuery()
             'create new dtrs       
 
-            NetOpen(mEmployee_IDs, "select a.*,b.schedule_id,b.department_id from (select employee_id from employee_logs where employee_id in (select employee_id from employees) and " & _
-                                   "date(datetime_log) >='" & Format(mDateFrom, "yyyy-MM-dd") & "'group by employee_id) a " & _
+            'NetOpen(mEmployee_IDs, "select a.*,b.schedule_id,b.department_id from (select employee_id from employee_logs where employee_id in (select employee_id from employees) and " & _
+            '                       "date(datetime_log) >='" & Format(mDateFrom, "yyyy-MM-dd") & "'group by employee_id) a " & _
+            '                       "left outer join employees b on a.employee_id=b.employee_id ", Cn.Connection)
+
+            NetOpen(mEmployee_IDs, "select a.*,b.schedule_id,b.department_id from (select employee_id from employee_logs where employee_bio_id in (" & bioIDs & ") and " & _
+                                   "date(datetime_log) >='" & Format(mDateFrom, "yyyy-MM-dd") & "'group by employee_id " & _
+                                   "HAVING employee_id IS NOT NULL) a " & _
                                    "left outer join employees b on a.employee_id=b.employee_id ", Cn.Connection)
 
+            ProgressBar1.Value = 0
+            ProgressBar1.Maximum = mEmployee_IDs.Rows.Count
             For Each mEmpID As DataRow In mEmployee_IDs.Rows
+                ProgressBar1.Value = ProgressBar1.Value + 1
                 NetOpen(employee_logs, "select * from employee_logs where employee_id = " & CType(mEmpID.Item("employee_id"), String) & " and " & _
                                     "date(datetime_log) >= '" & Format(mDateFrom, "yyyy-MM-dd") & "' order by datetime_log", Cn.Connection)
 
@@ -263,7 +305,7 @@ Public Class frmImportDTR
                         If mCurrDate <> CType(mLog.Item("datetime_log"), Date).Date Then
                             If CType(mLog.Item("log_status"), Integer) = 1 Then
                                 minuteDiff = CType(DateDiff(DateInterval.Minute, previousLog, CType(mLog.Item("datetime_log"), DateTime)), Double)
-                                
+
                                 'Create a new DTR entry for time logs with more than the specified number of hours difference.
                                 If minuteDiff > SysParam.NextDayMinuteDifference Then
                                     mColNum = 1
@@ -376,7 +418,7 @@ Public Class frmImportDTR
 
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
         Dim dtEmployees As New DataTable
-        Call Create_DTR()
+        'Call Create_DTR()
         If NetOpen(dtEmployees, "select a.employee_id,b.department_id from " & _
                             "(select x1.* from (select employee_id from employee_dtrs where work_date BETWEEN '" & Format(dtpDateFrom.Value, "yyyy-MM-dd") & "' AND '" & Format(Now.Date, "yyyy-MM-dd") & "' " & _
                             "union all " & _

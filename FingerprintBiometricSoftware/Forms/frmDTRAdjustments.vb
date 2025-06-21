@@ -48,6 +48,15 @@ Public Class frmDTRAdjustments
         If Trim(mNewLog4) <> "" Then txt2nd_outsched.Value = CType(mNewLog4, DateTime)
         If Trim(mNewLog5) <> "" Then txt3rd_insched.Value = CType(mNewLog5, DateTime)
         If Trim(mNewLog6) <> "" Then txt3rd_outsched.Value = CType(mNewLog6, DateTime)
+
+        If SysParam.EditDateTimeEntry Then
+            txt1st_insched.ReadOnly = False
+            txt1st_outsched.ReadOnly = False
+            txt2nd_insched.ReadOnly = False
+            txt2nd_outsched.ReadOnly = False
+            txt3rd_insched.ReadOnly = False
+            txt3rd_outsched.ReadOnly = False
+        End If
     End Sub
 
     Private Sub loadTimeLogs(lbTop As Integer, lbLeft As Integer, lbWidth As Integer)
@@ -71,7 +80,9 @@ Public Class frmDTRAdjustments
     End Sub
 
     Private Sub lb_Click(sender As Object, e As System.EventArgs) Handles lb.Click
-        txt.Text = CType(lb.Text, String)
+        'txt.Text = CType(lb.Text, String)
+        txt.Value = CType(lb.Text, String)
+        lb.Visible = False
         txt.Focus()
     End Sub
 
@@ -160,5 +171,47 @@ Public Class frmDTRAdjustments
         lbWidth = txt3rd_outsched.Width + btnOut03.Width
         Call loadTimeLogs(lbTop, lbLeft, lbWidth)
         txt = txt3rd_outsched
+    End Sub
+
+    Private Sub txt1st_insched_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txt1st_insched.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Delete
+                txt1st_insched.Value = vbNull
+        End Select
+    End Sub
+
+    Private Sub txt1st_outsched_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txt1st_outsched.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Delete
+                txt1st_outsched.Value = vbNull
+        End Select
+    End Sub
+
+    Private Sub txt2nd_insched_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txt2nd_insched.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Delete
+                txt2nd_insched.Value = vbNull
+        End Select
+    End Sub
+
+    Private Sub txt2nd_outsched_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txt2nd_outsched.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Delete
+                txt2nd_outsched.Value = vbNull
+        End Select
+    End Sub
+
+    Private Sub txt3rd_insched_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txt3rd_insched.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Delete
+                txt3rd_insched.Value = vbNull
+        End Select
+    End Sub
+
+    Private Sub txt3rd_outsched_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txt3rd_outsched.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Delete
+                txt3rd_outsched.Value = vbNull
+        End Select
     End Sub
 End Class

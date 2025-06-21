@@ -115,7 +115,7 @@ Partial Class frmUsers
         Me.txtConfirm.Name = "txtConfirm"
         Me.txtConfirm.PasswordChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtConfirm.Size = New System.Drawing.Size(358, 26)
-        Me.txtConfirm.TabIndex = 143
+        Me.txtConfirm.TabIndex = 133
         Me.txtConfirm.Tag = Nothing
         Me.txtConfirm.TextDetached = True
         '

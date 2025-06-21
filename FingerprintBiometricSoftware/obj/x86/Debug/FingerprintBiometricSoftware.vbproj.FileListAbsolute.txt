@@ -157,3 +157,4 @@ D:\Marky\Projects\FingerprintBiometricSoftware\FingerprintBiometricSoftware\obj\
 D:\Marky\Projects\FingerprintBiometricSoftware\FingerprintBiometricSoftware\obj\x86\Debug\FingerprintBiometricSoftware.exe
 D:\Marky\Projects\FingerprintBiometricSoftware\FingerprintBiometricSoftware\obj\x86\Debug\FingerprintBiometricSoftware.xml
 D:\Marky\Projects\FingerprintBiometricSoftware\FingerprintBiometricSoftware\obj\x86\Debug\FingerprintBiometricSoftware.pdb
+D:\Marky\Projects\FingerprintBiometricSoftware\FingerprintBiometricSoftware\obj\x86\Debug\FingerprintBiometricSoftware.vbprojResolveAssemblyReference.cache

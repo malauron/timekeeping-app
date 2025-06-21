@@ -253,6 +253,7 @@ Partial Class frmDTRAdjustments
         Me.txt3rd_outsched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
         Me.txt3rd_outsched.Location = New System.Drawing.Point(237, 121)
         Me.txt3rd_outsched.Name = "txt3rd_outsched"
+        Me.txt3rd_outsched.ReadOnly = True
         Me.txt3rd_outsched.Size = New System.Drawing.Size(141, 26)
         Me.txt3rd_outsched.TabIndex = 222
         Me.txt3rd_outsched.Tag = Nothing
@@ -280,6 +281,7 @@ Partial Class frmDTRAdjustments
         Me.txt3rd_insched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
         Me.txt3rd_insched.Location = New System.Drawing.Point(63, 121)
         Me.txt3rd_insched.Name = "txt3rd_insched"
+        Me.txt3rd_insched.ReadOnly = True
         Me.txt3rd_insched.Size = New System.Drawing.Size(141, 26)
         Me.txt3rd_insched.TabIndex = 221
         Me.txt3rd_insched.Tag = Nothing
@@ -307,6 +309,7 @@ Partial Class frmDTRAdjustments
         Me.txt2nd_outsched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
         Me.txt2nd_outsched.Location = New System.Drawing.Point(237, 89)
         Me.txt2nd_outsched.Name = "txt2nd_outsched"
+        Me.txt2nd_outsched.ReadOnly = True
         Me.txt2nd_outsched.Size = New System.Drawing.Size(141, 26)
         Me.txt2nd_outsched.TabIndex = 220
         Me.txt2nd_outsched.Tag = Nothing
@@ -334,6 +337,7 @@ Partial Class frmDTRAdjustments
         Me.txt2nd_insched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
         Me.txt2nd_insched.Location = New System.Drawing.Point(63, 89)
         Me.txt2nd_insched.Name = "txt2nd_insched"
+        Me.txt2nd_insched.ReadOnly = True
         Me.txt2nd_insched.Size = New System.Drawing.Size(141, 26)
         Me.txt2nd_insched.TabIndex = 219
         Me.txt2nd_insched.Tag = Nothing
@@ -361,6 +365,7 @@ Partial Class frmDTRAdjustments
         Me.txt1st_outsched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
         Me.txt1st_outsched.Location = New System.Drawing.Point(237, 57)
         Me.txt1st_outsched.Name = "txt1st_outsched"
+        Me.txt1st_outsched.ReadOnly = True
         Me.txt1st_outsched.Size = New System.Drawing.Size(141, 26)
         Me.txt1st_outsched.TabIndex = 218
         Me.txt1st_outsched.Tag = Nothing
@@ -418,6 +423,7 @@ Partial Class frmDTRAdjustments
         Me.txt1st_insched.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat
         Me.txt1st_insched.Location = New System.Drawing.Point(63, 57)
         Me.txt1st_insched.Name = "txt1st_insched"
+        Me.txt1st_insched.ReadOnly = True
         Me.txt1st_insched.Size = New System.Drawing.Size(141, 26)
         Me.txt1st_insched.TabIndex = 201
         Me.txt1st_insched.Tag = Nothing

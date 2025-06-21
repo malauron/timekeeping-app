@@ -64,13 +64,15 @@ Public Class frmUsers
             Exit Sub
         End If
 
-        Try
-            Dim mTrans As MySqlTransaction
-            Dim mCommand As New MySqlCommand
-            Dim mCmdChk As New MySqlCommand
-            Dim rdPromoCtr As MySqlDataReader
+        Dim mTrans As MySqlTransaction
+        Dim mCommand As New MySqlCommand
+        Dim mCmdChk As New MySqlCommand
+        Dim rdPromoCtr As MySqlDataReader
 
-            mTrans = Cn.Connection.BeginTransaction
+        mTrans = Cn.Connection.BeginTransaction
+
+        Try
+
             mCommand.Transaction = mTrans
             mCommand.Connection = Cn.Connection
             mCmdChk.Connection = Cn.Connection
@@ -83,9 +85,11 @@ Public Class frmUsers
 
                 If rdPromoCtr.HasRows Then
                     MsgBox("Username already in use!", MsgBoxStyle.Exclamation)
+                    rdPromoCtr.Close()
+                    mCmdChk.Dispose()
+                    mCommand.Dispose()
                     mTrans.Rollback()
                     mTrans.Dispose()
-                    rdPromoCtr.Close()
                     Exit Sub
                 Else
                     rdPromoCtr.Close()
@@ -126,7 +130,7 @@ Public Class frmUsers
             End If
 
             mTrans.Commit()
-            mTrans.Dispose()
+            'mTrans.Dispose()
             If MsgBox("Information has been succesfully saved!" & vbCrLf & "Do you want to create new user?", CType(MsgBoxStyle.Information + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbYes Then
                 Call Clear_Fields()
             Else
@@ -144,8 +148,24 @@ Public Class frmUsers
 
         Catch ex As MySqlException
             MsgBox(ex.Message, MsgBoxStyle.Critical)
+            If Not (mTrans Is Nothing) Then
+                mTrans.Rollback()
+            End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
+            If Not (mTrans Is Nothing) Then
+                mTrans.Rollback()
+            End If
+        Finally
+            Try
+                mCommand.Dispose()
+                mTrans.Dispose()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            Finally
+                btnNew.Enabled = True
+                btnSave.Enabled = True
+            End Try
         End Try
     End Sub
 

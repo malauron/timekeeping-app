@@ -32,6 +32,7 @@ Module modRoutines
                     SysParam.FlexiBreakHours = CType(mRow.Item("flexibreak_hrs"), Double)
                     SysParam.NextDayMinuteDifference = CType(mRow.Item("nextDayMinDiff"), Double)
                     SysParam.EditDTREntry = CType(mRow.Item("editDTR"), Boolean)
+                    SysParam.EditDateTimeEntry = CType(mRow.Item("editDateTime"), Boolean)
                     SysParam.ExportDTRSummary = CType(mRow.Item("exportDTR"), Boolean)
 
                 Next
